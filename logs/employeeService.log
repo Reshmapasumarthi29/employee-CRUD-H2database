@@ -34,3 +34,77 @@
 2026-06-24 00:43:07 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:5
 2026-06-24 00:43:31 [INFO] com.example.employee.service.EmployeeServiceImpl - deleting employww with id:2
 2026-06-24 00:43:31 [INFO] com.example.employee.service.EmployeeServiceImpl - deleted employee
+2026-06-24 12:56:26 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 1
+2026-06-24 13:06:54 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 13:06:54 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 13:21:59 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 13:21:59 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 14:53:46 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:55:29 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 14:55:29 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 14:55:42 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:56:10 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :sandeep
+2026-06-24 14:56:10 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 14:56:15 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:56:23 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-24 14:56:23 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:2
+2026-06-24 14:57:10 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of res
+2026-06-24 14:57:10 [INFO] com.example.employee.service.EmployeeServiceImpl - updated res details
+2026-06-24 14:57:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:57:46 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 1
+2026-06-24 14:57:46 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:1
+2026-06-24 14:57:51 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:58:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:59:37 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 14:59:46 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :sandeep
+2026-06-24 14:59:46 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 14:59:57 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 14:59:57 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 15:00:12 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:12:56 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:13:03 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 15:13:03 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 15:13:52 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of res
+2026-06-24 15:13:52 [INFO] com.example.employee.service.EmployeeServiceImpl - updated res details
+2026-06-24 15:14:44 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of reshma
+2026-06-24 15:14:44 [INFO] com.example.employee.service.EmployeeServiceImpl - updated reshma details
+2026-06-24 15:15:18 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:15:49 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 15:15:49 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 15:16:21 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :sandeep
+2026-06-24 15:16:21 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 15:16:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:16:48 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:17:21 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 1
+2026-06-24 15:17:21 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:1
+2026-06-24 15:46:12 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:46:25 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :sandeep
+2026-06-24 15:46:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 15:46:35 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 15:54:40 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 16:33:39 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 16:33:52 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :sandeep
+2026-06-24 16:33:52 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 16:34:04 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :reshma
+2026-06-24 16:34:04 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-24 16:34:08 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-24 16:34:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 1
+2026-06-24 16:34:25 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:1
+2026-06-24 16:34:37 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-24 16:34:37 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:2
+2026-06-24 16:35:21 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of res
+2026-06-24 16:35:21 [INFO] com.example.employee.service.EmployeeServiceImpl - updated res details
+2026-06-24 16:35:25 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-24 16:35:25 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:2
+2026-06-24 16:35:55 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-24 16:35:55 [INFO] com.example.employee.service.EmployeeServiceImpl - feteched Employee with id:2
+2026-06-24 16:36:03 [INFO] com.example.employee.service.EmployeeServiceImpl - Displaying all employee details....
+2026-06-25 01:28:38 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :John
+2026-06-25 01:28:38 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added
+2026-06-25 08:23:53 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-25 08:24:19 [INFO] com.example.employee.service.EmployeeServiceImpl - Fetching employee with ID: 2
+2026-06-25 08:26:31 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of John
+2026-06-25 08:28:43 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of John
+2026-06-25 08:31:39 [INFO] com.example.employee.service.EmployeeServiceImpl - Updating employee details of John
+2026-06-25 08:33:55 [INFO] com.example.employee.service.EmployeeServiceImpl - creating a employee :Joseph
+2026-06-25 08:33:55 [INFO] com.example.employee.service.EmployeeServiceImpl - Employee added

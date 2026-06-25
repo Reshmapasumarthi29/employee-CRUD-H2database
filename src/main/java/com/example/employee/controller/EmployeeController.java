@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,53 +12,87 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.employee.dtos.EmployeeRequestDto;
+import com.example.employee.dtos.EmployeeResponseDto;
 import com.example.employee.entity.Employee;
+import com.example.employee.response.ApiResponse;
+import com.example.employee.service.EmployeeService;
 import com.example.employee.service.EmployeeServiceImpl;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeeController {
 
-	private EmployeeServiceImpl employeeServiceImpl;
+	private EmployeeService employeeService;
 	
 	
 	
-	public EmployeeController(EmployeeServiceImpl employeeServiceImpl) {
-		this.employeeServiceImpl = employeeServiceImpl;
+
+
+
+   public EmployeeController(EmployeeService employeeService) {
+
+		this.employeeService = employeeService;
 	}
 
-
-   @GetMapping("/getEmployees")
-	public ResponseEntity<List<Employee>> allEmployees(){
-	   List<Employee> allEmp = employeeServiceImpl.getAllEmployees();
-		return new ResponseEntity<>(allEmp,HttpStatus.OK);
+   @GetMapping("/")
+	public ResponseEntity<ApiResponse<List<EmployeeResponseDto>>> allEmployees(){
+	   List<EmployeeResponseDto> allEmp = employeeService.getAllEmployees();
+	   ApiResponse<List<EmployeeResponseDto>> response = new ApiResponse<>();
+	   response.setStatus(200);
+	   response.setMessage("Getting all employees");
+	   response.setData(allEmp);
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
    
-   @GetMapping("/getEmployee/{id}")
-   public ResponseEntity<Employee> getEmployee(@PathVariable long id) {
-	   Employee emp = employeeServiceImpl.getEmployee(id);
-	   return new ResponseEntity<Employee>(emp, HttpStatusCode.valueOf(200)) ;
+   @GetMapping("/{id}")
+   public ResponseEntity<ApiResponse<EmployeeResponseDto>> getEmployee(@PathVariable long id) {
+	   EmployeeResponseDto emp = employeeService.getEmployee(id);
+	   ApiResponse<EmployeeResponseDto> response = new ApiResponse<>();
+	   response.setStatus(200);
+	   response.setMessage("Getting employee by id");
+	   response.setData(emp);
+	   
+	   return new ResponseEntity<ApiResponse<EmployeeResponseDto>>(response, HttpStatus.OK) ;
 	   
    }
    
-   @PostMapping("/add")
-   public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+   @PostMapping(path = "/",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+   public ResponseEntity<ApiResponse<EmployeeResponseDto>> addEmployee(@RequestPart EmployeeRequestDto employeeRequestDto,
+		                                @RequestPart MultipartFile photo,
+		                                @RequestPart MultipartFile resume) {
 	   
-	   Employee emp = employeeServiceImpl.addEmployee(employee);
-	   return new ResponseEntity<Employee>(emp, HttpStatusCode.valueOf(201));
+	   EmployeeResponseDto emp = employeeService.addEmployee(employeeRequestDto, photo, resume);
+	   ApiResponse<EmployeeResponseDto> response = new ApiResponse<>();
+	   response.setStatus(201);
+	   response.setMessage("added employee with id:"+emp.getEmpId());
+	   response.setData(emp);
+	   return new ResponseEntity<ApiResponse<EmployeeResponseDto>>(response, HttpStatus.CREATED);
    }
    
    
-   @PutMapping("/update/{id}")
-   public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
-	   Employee emp =employeeServiceImpl.updateEmployee(id, employee);
-	   return new ResponseEntity<Employee>(emp, HttpStatus.OK);
+   @PutMapping("/{id}")
+   public ResponseEntity<ApiResponse<EmployeeResponseDto>> updateEmployee(@PathVariable long id, @RequestBody EmployeeRequestDto employeeRequestDto) {
+	   EmployeeResponseDto emp =employeeService.updateEmployee(id, employeeRequestDto);
+	   ApiResponse<EmployeeResponseDto> response = new ApiResponse<>();
+	   response.setStatus(200);
+	   response.setMessage("Updating employee details");
+	   response.setData(emp); 
+	   return new ResponseEntity<>(response, HttpStatus.OK);
    }
    
-   @DeleteMapping("/delete/{id}")
-   public String deleteEmployee(@PathVariable long id) {
-	   employeeServiceImpl.deleteEmployee(id);
-   return "deleted sucessfully";
+   @DeleteMapping("/{id}")
+   public ResponseEntity<ApiResponse<EmployeeResponseDto>> deleteEmployee(@PathVariable long id) {
+	     EmployeeResponseDto emp = employeeService.deleteEmployee(id);
+	     ApiResponse<EmployeeResponseDto> response = new ApiResponse<>();
+		   response.setStatus(200);
+		   response.setMessage("deleting employee");
+		   response.setData(emp);
+   return new ResponseEntity<>(response, HttpStatus.OK);
    }
 }

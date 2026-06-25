@@ -1,17 +1,8 @@
-package com.example.employee.entity;
+package com.example.employee.dtos;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-@Entity
-
-public class Employee {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long empId;
+public class EmployeeResponseDto {
+	
+    private long empId;
 	
 	private String name;
 	
@@ -27,12 +18,6 @@ public class Employee {
 	
 	private String resumePath;
 	
-	
-
-	public Employee() {
-		
-	}
-
 
 	public long getEmpId() {
 		return empId;
@@ -66,8 +51,6 @@ public class Employee {
 		this.department = department;
 	}
 
-
-
 	public double getSalary() {
 		return salary;
 	}
@@ -75,51 +58,34 @@ public class Employee {
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
-	
-	
-	
 
 	public String getActiveSw() {
 		return activeSw;
 	}
 
-
 	public void setActiveSw(String activeSw) {
 		this.activeSw = activeSw;
 	}
-	
-	
-
 
 	public String getPhotoPath() {
 		return photoPath;
 	}
 
-
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;
 	}
-
 
 	public String getResumePath() {
 		return resumePath;
 	}
 
-
 	public void setResumePath(String resumePath) {
 		this.resumePath = resumePath;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Employee [empId=" + empId + ", name=" + name + ", email=" + email + ", department=" + department
-				+ ", salary=" + salary + ", activeSw=" + activeSw + ", photoPath=" + photoPath + ", resumePath="
-				+ resumePath + "]";
-	}
-
-
-
 	
 	
+	
+	
+	
+
 }

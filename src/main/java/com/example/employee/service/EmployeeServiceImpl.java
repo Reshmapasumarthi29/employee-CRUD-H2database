@@ -1,11 +1,21 @@
 package com.example.employee.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.employee.dtos.EmployeeRequestDto;
+import com.example.employee.dtos.EmployeeResponseDto;
 import com.example.employee.entity.Employee;
 import com.example.employee.exception.EmployeeNotFoundException;
 import com.example.employee.repository.EmployeeRepository;
@@ -13,8 +23,15 @@ import com.example.employee.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl  implements EmployeeService{
-
+    
 	private EmployeeRepository employeeRepository;
+	
+	@Value("${file.upload.image_path}")
+	private String imagePath;
+	
+	@Value("${file.upload.resume_path}")
+	private String resumePath;
+	
 	
 	private static final Logger logger = org.slf4j.LoggerFactory.getLogger(EmployeeServiceImpl.class); 
 	
@@ -27,25 +44,34 @@ public class EmployeeServiceImpl  implements EmployeeService{
 
 
 	@Override
-	public List<Employee> getAllEmployees() {
+	public List<EmployeeResponseDto> getAllEmployees() {
 		logger.info("Displaying all employee details....");
 		
 		List<Employee> allEmployees = employeeRepository.findAll();
+		List<EmployeeResponseDto> responseDto = new ArrayList<>();
+		for(Employee employee: allEmployees) {
+			EmployeeResponseDto dto = new EmployeeResponseDto();
+			BeanUtils.copyProperties(employee, dto);
+			responseDto.add(dto);
+		}
 		
-		return allEmployees;
+		return responseDto;
 	}
 
 	@Override
-	public Employee getEmployee(long id) {
+	public EmployeeResponseDto getEmployee(long id) {
 		
 		logger.info("Fetching employee with ID: {}", id);
-		
+			
 		Employee emp = employeeRepository.findById(id)
 				.orElseThrow(()->
 				new EmployeeNotFoundException("Employee Not Found with id:" +id));
 		
+		EmployeeResponseDto responseDto = new EmployeeResponseDto();
+		BeanUtils.copyProperties(emp, responseDto);
+		
 		logger.info("feteched Employee with id:" +id);
-		return emp;
+		return responseDto;
 	}
 
 	
@@ -53,72 +79,98 @@ public class EmployeeServiceImpl  implements EmployeeService{
 
 
 	@Override
-	public Employee addEmployee(Employee employee) {
+	public EmployeeResponseDto addEmployee(EmployeeRequestDto employeeRequestDto, MultipartFile photoFile, MultipartFile resumeFile) {
 		
-		logger.info("creating a employee :" + employee.getName());
+		logger.info("creating a employee :" + employeeRequestDto.getName());
 		
-		Employee emp = employeeRepository.save(employee);
+		Employee emp = new Employee();
+		
+		BeanUtils.copyProperties(employeeRequestDto, emp);
+		
+		long timeStamp = System.currentTimeMillis();
+		
+		String imageName = timeStamp +"_" + photoFile.getOriginalFilename();
+		String resumeName = timeStamp +"_" + resumeFile.getOriginalFilename();
+		
+		File imageDestinationFile = new File(imagePath,imageName);
+		File resumeDestinationFile = new File(resumePath, resumeName);
+		File imageFolder = new File(imagePath);
+		File resumeFolder = new File(resumePath);
+		
+		if(!imageFolder.exists()) {
+			imageFolder.mkdirs();
+		}
+		
+		if(!resumeFolder.exists()) {
+			resumeFolder.mkdirs();
+		}
+		
+		try {
+			photoFile.transferTo(imageDestinationFile);
+			resumeFile.transferTo(resumeDestinationFile);
+		} catch (Exception e) {
+			throw new RuntimeException("File upload failed");
+		}
+		
+		
+		
+		emp.setActiveSw("yes");
+		emp.setPhotoPath("images/" + imageName);
+		emp.setResumePath("resume" + resumeName); 
+		
+		
+		Employee empAdd = employeeRepository.save(emp);
+		
+		EmployeeResponseDto responseDto = new EmployeeResponseDto();
+		
+		BeanUtils.copyProperties(empAdd, responseDto);
 		
 		logger.info("Employee added");
-		return emp;
+		return responseDto;
 	}
 
 
 
 	@Override
-	public Employee updateEmployee(long id, Employee employee) {
+	public EmployeeResponseDto updateEmployee(long id, EmployeeRequestDto employeeRequestDto) {
 		
-		logger.info("Updating employee details of " +employee.getName());
+		logger.info("Updating employee details of " +employeeRequestDto.getName());
 		
 		Employee emp = employeeRepository.findById(id)
 				.orElseThrow(()->
 				new EmployeeNotFoundException("Employee not found with id:"+id));
 		
 		
-		System.out.println(emp);
-		System.out.println(employee);
-		emp.setName(employee.getName());
-		emp.setEmail(employee.getEmail());
-		emp.setDepartment(employee.getDepartment());
-		emp.setSalary(employee.getSalary());
-
+		emp.setName(employeeRequestDto.getName());
+		emp.setEmail(employeeRequestDto.getEmail());
+		emp.setDepartment(employeeRequestDto.getDepartment());
+		emp.setSalary(employeeRequestDto.getSalary());
+		
+	
 		logger.info("updated " +emp.getName() +" details");
-			employeeRepository.save(emp); 
+		
+			employeeRepository.save(emp);
+			
+			EmployeeResponseDto responseDto = new EmployeeResponseDto();
 
-		
-		
-		
-		return emp;
+			BeanUtils.copyProperties(emp, responseDto);
+
+		return responseDto;
 	}
 
 
 
 	@Override
-	public void deleteEmployee(long id) {
-		Optional<Employee> emp =employeeRepository.findById(id);
-		if(emp.isPresent()) {
-
-			logger.info("deleting employww with id:" +id);
-			
-		     employeeRepository.deleteById(id);
-		     
-		     logger.info("deleted employee");
-		}
-		else {
-			logger.error("no such employee with id:" +id);
-			throw new EmployeeNotFoundException("Employee Not found with id:" +id);
-		}
+	public EmployeeResponseDto deleteEmployee(long id) {
+		Employee emp =employeeRepository.findById(id)
+				.orElseThrow(()->new EmployeeNotFoundException("Employee not found with id :" +id));
+		emp.setActiveSw("No");
+		employeeRepository.save(emp);
+	    EmployeeResponseDto responsedto = new EmployeeResponseDto();
+	    BeanUtils.copyProperties(emp, responsedto);
+		return responsedto;
+	
 	}
-
-
-
-
-
-
-
-
-	
-	
 	
 
 }

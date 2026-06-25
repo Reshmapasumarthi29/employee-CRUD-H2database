@@ -11,7 +11,11 @@ import com.sun.net.httpserver.HttpsConfigurator;
 public class ExceptionHandling{
 
 	@ExceptionHandler(EmployeeNotFoundException.class)
-	public  ResponseEntity<String> handleEmployeeNotFound(EmployeeNotFoundException ex){
-		return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+	public  ResponseEntity<ErrorResponse> handleEmployeeNotFound(EmployeeNotFoundException ex){
+		
+		ErrorResponse response = new ErrorResponse();
+		response.setStatus(404);
+		response.setError(ex.getMessage());
+		return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	}
 }

@@ -3,18 +3,22 @@ package com.example.employee.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.employee.dtos.EmployeeRequestDto;
+import com.example.employee.dtos.EmployeeResponseDto;
 import com.example.employee.entity.Employee;
 
 public interface EmployeeService {
 	
-	public List<Employee> getAllEmployees();
+	public List<EmployeeResponseDto> getAllEmployees();
 	
-	public Employee getEmployee(long id);
+	public EmployeeResponseDto getEmployee(long id);
 	
-	public Employee addEmployee(Employee employee);
+	public EmployeeResponseDto addEmployee(EmployeeRequestDto employeeRequestDto, MultipartFile photoFile, MultipartFile resumeFile);
 
-	public Employee updateEmployee(long id, Employee employee);
+	public EmployeeResponseDto updateEmployee(long id, EmployeeRequestDto employeeRequestDto);
 	
-	public void deleteEmployee(long id);
+	public EmployeeResponseDto deleteEmployee(long id);
 
 }
